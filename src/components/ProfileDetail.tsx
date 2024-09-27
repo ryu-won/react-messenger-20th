@@ -1,5 +1,9 @@
 import cancel from "../assets/cancel.svg";
 import settings from "../assets/setting.svg";
+import facebook from "../assets/profile_facebook.svg";
+import instagram from "../assets/profile_insta.svg";
+import plus from "../assets/profile_plus.svg";
+import edit from "../assets/edit.svg";
 
 interface User {
   name: string;
@@ -24,25 +28,35 @@ const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
       </div>
 
       {/* 프로필 이미지 */}
-      <img
-        src={user.profilePic}
-        alt="Profile"
-        className="w-[100px] h-[100px] rounded-full mt-8"
-      />
+      <div className="relative">
+        <button>
+          <img
+            src={user.profilePic}
+            alt="Profile"
+            className="w-[100px] h-[100px] rounded-full"
+          />
+
+          <img
+            src={edit}
+            alt="edit"
+            className="absolute top-20 left-full transform translate-x-[-100%] "
+          />
+        </button>
+      </div>
 
       {/* 사용자 이름 */}
-      <h3 className="text-xl font-bold mt-4">{user.name}</h3>
+      <h3 className="text-xl font-bold mt-[26px]">{user.name}</h3>
 
       {/* 소셜 아이콘 */}
-      <div className="flex mt-8 space-x-4">
-        <button className="w-[50px] h-[50px] bg-white rounded-full flex items-center justify-center shadow">
-          <i className="fab fa-facebook text-xl text-blue-500"></i>
+      <div className="flex mt-[18px] space-x-4">
+        <button className=" bg-white rounded-full flex items-center justify-center ">
+          <img src={facebook} alt="facebook" className="w-[60px] h-[60px]" />
         </button>
-        <button className="w-[50px] h-[50px] bg-white rounded-full flex items-center justify-center shadow">
-          <i className="fab fa-instagram text-xl text-pink-500"></i>
+        <button className=" bg-white rounded-full flex items-center justify-center ">
+          <img src={instagram} alt="instagram" className="w-[60px] h-[60px]" />
         </button>
-        <button className="w-[50px] h-[50px] bg-white rounded-full flex items-center justify-center shadow">
-          <i className="fas fa-plus text-xl"></i>
+        <button className=" bg-white rounded-full flex items-center justify-center ">
+          <img src={plus} alt="plus" className="w-[60px] h-[60px]" />
         </button>
       </div>
     </div>
