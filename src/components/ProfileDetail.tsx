@@ -29,7 +29,6 @@ const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
         </button>
       </div>
 
-      {/* 프로필 이미지 */}
       <div className="relative">
         <button>
           <img
@@ -46,10 +45,8 @@ const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
         </button>
       </div>
 
-      {/* 사용자 이름 */}
       <h3 className="text-xl font-bold mt-[26px]">{user.name}</h3>
 
-      {/* 소셜 아이콘 */}
       <div className="flex mt-[18px] space-x-[40px]">
         <button className="  rounded-full flex items-center justify-center">
           <a href={user.facebook}>

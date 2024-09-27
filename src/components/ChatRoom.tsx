@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "./Header";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
@@ -7,7 +7,6 @@ import ProfileDetail from "./ProfileDetail";
 import ceosProfilePic from "../assets/Profile image.svg";
 import userProfilePic from "../assets/Profile image.svg";
 
-// 유저 타입 정의
 interface User {
   id: number;
   name: string;
@@ -16,7 +15,6 @@ interface User {
   instagram: string;
 }
 
-// 메시지 타입 정의
 interface Message {
   id: number;
   text: string;
@@ -44,11 +42,40 @@ const ChatRoom: React.FC = () => {
   };
 
   const [currentUser, setCurrentUser] = useState<User>(users.chae);
-  const [messages, setMessages] = useState<Message[]>([]);
+
+  const otherUser =
+    currentUser.name === users.chae.name ? users.ceos : users.chae;
+
+  const initialMessages: Message[] = [
+    {
+      id: 1,
+      text: "머하밍??",
+      sender: "CEOS",
+      receiver: "채린공주",
+      time: new Date().toISOString(),
+    },
+    {
+      id: 2,
+      text: "과제중🤮🤮",
+      sender: "채린공주",
+      receiver: "CEOS",
+      time: new Date().toISOString(),
+    },
+    {
+      id: 3,
+      text: "🤦‍♀️🤦‍♀️",
+      sender: "CEOS",
+      receiver: "채린공주",
+      time: new Date().toISOString(),
+    },
+  ];
+
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [isProfileDetailOpen, setIsProfileDetailOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // LocalStorage에 저장된 메시지가 있으면 불러오기
     const storedMessages = localStorage.getItem("conversationMessages");
     if (storedMessages) {
       setMessages(JSON.parse(storedMessages));
@@ -99,7 +126,7 @@ const ChatRoom: React.FC = () => {
   return (
     <div className="relative flex flex-col h-[100vh] w-full md:max-w-[375px] mx-auto overflow-y-none">
       <Header
-        user={currentUser}
+        user={otherUser}
         onProfileClick={toggleUser}
         isProfileDetailOpen={isProfileDetailOpen}
       />
@@ -110,7 +137,7 @@ const ChatRoom: React.FC = () => {
         }`}
         style={{ filter: isProfileDetailOpen ? "blur(4px)" : "none" }}
       >
-        <ProfileInfo user={currentUser} onProfileDetail={handleProfileDetail} />
+        <ProfileInfo user={otherUser} onProfileDetail={handleProfileDetail} />
         <MessageList messages={messages} currentUser={currentUser} />
         <div ref={messagesEndRef} />
       </div>
@@ -121,7 +148,7 @@ const ChatRoom: React.FC = () => {
 
       {isProfileDetailOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-white/80 z-50">
-          <ProfileDetail user={currentUser} onClose={closeProfileDetail} />
+          <ProfileDetail user={otherUser} onClose={closeProfileDetail} />
         </div>
       )}
     </div>

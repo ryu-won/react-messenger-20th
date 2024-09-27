@@ -4,7 +4,7 @@ interface User {
 }
 
 interface ProfileInfoProps {
-  user: User | undefined;
+  user: User;
   onProfileDetail: () => void;
 }
 
@@ -14,7 +14,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ user, onProfileDetail }) => {
   }
 
   return (
-    <div className="bg-white ">
+    <div className="bg-white">
       <div className="flex flex-col items-center">
         {/* 프로필 이미지 */}
         <img
@@ -24,7 +24,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ user, onProfileDetail }) => {
         />
 
         {/* 사용자 이름 */}
-        <h3 className=" font-bold mt-[10px]" style={{ fontSize: "22px" }}>
+        <h3 className="font-bold mt-[10px]" style={{ fontSize: "22px" }}>
           {user.name}
         </h3>
 

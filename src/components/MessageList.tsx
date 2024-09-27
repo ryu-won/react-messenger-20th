@@ -130,6 +130,7 @@ const DateTimeText = styled.div<{ isCurrentUser: boolean }>`
   font-size: 12px;
   color: #737373;
   margin: 20px 0;
+  white-space: nowrap;
 `;
 
 const MessageContainer = styled.div<{ isCurrentUser: boolean }>`
@@ -143,6 +144,7 @@ const MessageContainer = styled.div<{ isCurrentUser: boolean }>`
 const MessageContent = styled.div`
   display: flex;
   align-items: center;
+  word-break: break-all;
 `;
 
 const MessageText = styled.div<{ isCurrentUser: boolean }>`
