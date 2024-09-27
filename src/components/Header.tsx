@@ -15,7 +15,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ user, onProfileClick }) => {
   return (
-    <div className="flex items-center justify-between py-[11px] px-[16px] bg-white border-b-[1px] fixed top-0 w-[375px] h-[56px]">
+    <div className="flex items-center justify-between py-[11px] px-[16px] bg-white border-b-[1px] fixed top-0 w-full md:max-w-[375px] h-[56px]">
       <div className="flex items-center">
         <button className="mr-[8px]">
           <img src={backIcon} alt="Back Icon" className="w-[28px] h-[28px]" />

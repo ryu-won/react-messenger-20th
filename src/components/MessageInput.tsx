@@ -95,7 +95,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
   };
 
   return (
-    <div className="flex items-center px-[8px] py-[16px] bg-white fixed bottom-0 w-[375px] border-t h-[50px]">
+    <div className="flex items-center px-[8px] py-[16px] bg-white fixed bottom-0 w-full md:max-w-[375px] border-t h-[50px]">
       <button className="mr-[16px]">
         <img src={plus} alt="plus Icon" className="w-[28px] h-[28px]" />
       </button>

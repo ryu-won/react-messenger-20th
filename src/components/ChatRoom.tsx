@@ -104,7 +104,7 @@ const ChatRoom: React.FC = () => {
   };
 
   return (
-    <div className="relative flex flex-col h-[100vh] w-[375px] mx-auto">
+    <div className="relative flex flex-col h-[100vh] w-full md:max-w-[375px] mx-auto">
       <Header user={currentUser} onProfileClick={toggleUser} />
 
       <div
@@ -116,8 +116,8 @@ const ChatRoom: React.FC = () => {
         <ProfileInfo user={currentUser} onProfileDetail={handleProfileDetail} />
         <MessageList messages={messages} currentUser={currentUser} />
         <div ref={messagesEndRef} />
-        <MessageInput onSendMessage={handleSendMessage} />
       </div>
+      <MessageInput onSendMessage={handleSendMessage} />
 
       {isProfileDetailOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-white/80 z-50">
