@@ -8,6 +8,8 @@ import edit from "../assets/edit.svg";
 interface User {
   name: string;
   profilePic: string;
+  facebook: string;
+  instagram: string;
 }
 
 interface ProfileDetailProps {
@@ -50,13 +52,24 @@ const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
       {/* 소셜 아이콘 */}
       <div className="flex mt-[18px] space-x-4">
         <button className=" bg-white rounded-full flex items-center justify-center ">
-          <img src={facebook} alt="facebook" className="w-[60px] h-[60px]" />
+          <a href={user.facebook}>
+            <img src={facebook} alt="facebook" className="w-[60px] h-[60px]" />
+          </a>
+        </button>
+
+        <button className=" bg-white rounded-full flex items-center justify-center ">
+          <a href={user.instagram}>
+            <img
+              src={instagram}
+              alt="instagram"
+              className="w-[60px] h-[60px]"
+            />
+          </a>
         </button>
         <button className=" bg-white rounded-full flex items-center justify-center ">
-          <img src={instagram} alt="instagram" className="w-[60px] h-[60px]" />
-        </button>
-        <button className=" bg-white rounded-full flex items-center justify-center ">
-          <img src={plus} alt="plus" className="w-[60px] h-[60px]" />
+          <a href="#">
+            <img src={plus} alt="plus" className="w-[60px] h-[60px]" />
+          </a>
         </button>
       </div>
     </div>

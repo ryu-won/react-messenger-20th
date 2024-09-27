@@ -1,6 +1,6 @@
 import ceosProfilePic from "../assets/Profile image.svg";
 import userProfilePic from "../assets/Profile image.svg";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 interface Message {
   id: string | number;
@@ -17,6 +17,18 @@ interface MessageListProps {
   messages: Message[];
   currentUser: User;
 }
+
+// 애니메이션 정의
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
 
 const MessageList: React.FC<MessageListProps> = ({ messages, currentUser }) => {
   const formatTime = (time: string | number | Date): string => {
@@ -79,6 +91,7 @@ const MessageContainer = styled.div<{ isCurrentUser: boolean }>`
   justify-content: ${(props) =>
     props.isCurrentUser ? "flex-end" : "flex-start"};
   margin-bottom: 16px;
+  animation: ${fadeIn} 0.3s ease-in-out; // 애니메이션 추가
 `;
 
 const MessageContent = styled.div`

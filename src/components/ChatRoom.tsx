@@ -12,6 +12,8 @@ interface User {
   id: number;
   name: string;
   profilePic: string;
+  facebook: string;
+  instagram: string;
 }
 
 // 메시지 타입 정의
@@ -30,11 +32,15 @@ const ChatRoom: React.FC = () => {
       id: 1,
       name: "CEOS",
       profilePic: ceosProfilePic,
+      facebook: "https://www.facebook.com/clubceos/",
+      instagram: "https://www.instagram.com/ceos.sinchon/",
     },
     chae: {
       id: 2,
       name: "채린공주",
       profilePic: userProfilePic,
+      facebook: "https://www.facebook.com/",
+      instagram: "https://www.instagram.com/",
     },
   };
 

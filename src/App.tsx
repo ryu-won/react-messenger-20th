@@ -8,6 +8,8 @@ function App() {
   const [user, setUser] = useState({
     name: "채린공주",
     profilePic: "/path/to/profile-pic.jpg",
+    facebook: "https://www.facebook.com/",
+    instagram: "https://www.facebook.com/",
   });
 
   // ProfileDetail에서 닫기 기능을 위한 핸들러
