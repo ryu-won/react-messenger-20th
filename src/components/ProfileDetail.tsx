@@ -20,7 +20,7 @@ interface ProfileDetailProps {
 const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
   return (
     <div className="h-[100vh] bg-white bg-opacity-5 flex flex-col items-center justify-center w-[375px] mx-auto">
-      <div className="fixed top-0 flex items-center justify-between w-[375px] px-[16px] py-[14px]">
+      <div className="fixed top-0 flex items-center justify-between w-full md:max-w-[375px] px-[16px] py-[14px]">
         <button onClick={onClose}>
           <img src={cancel} alt="Cancel" />
         </button>

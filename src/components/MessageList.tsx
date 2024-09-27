@@ -117,6 +117,7 @@ const TimeText = styled.span<{ isCurrentUser: boolean }>`
   color: #999;
   margin-left: ${(props) => (props.isCurrentUser ? "0" : "4px")};
   margin-right: ${(props) => (props.isCurrentUser ? "4px" : "0")};
+  align-self: flex-end;
 `;
 
 export default MessageList;

@@ -7,6 +7,7 @@ import sendIcon from "../assets/send.svg";
 
 interface MessageInputProps {
   onSendMessage: (message: string) => void;
+  isProfileDetailOpen: boolean;
 }
 
 interface ThumbsUpProps {
@@ -68,7 +69,10 @@ const ThumbsUpAnimation: React.FC = () => {
   );
 };
 
-const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
+const MessageInput: React.FC<MessageInputProps> = ({
+  onSendMessage,
+  isProfileDetailOpen,
+}) => {
   const [message, setMessage] = useState<string>("");
   const [isInputClicked, setIsInputClicked] = useState<boolean>(false);
   const [showAnimation, setShowAnimation] = useState<boolean>(false);
@@ -95,7 +99,10 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
   };
 
   return (
-    <div className="flex items-center px-[8px] py-[16px] bg-white fixed bottom-0 w-full md:max-w-[375px] border-t h-[50px]">
+    <div
+      className="flex items-center px-[8px] py-[16px] bg-white fixed bottom-0 w-full md:max-w-[375px] border-t h-[50px]"
+      style={{ filter: isProfileDetailOpen ? "blur(4px)" : "none" }}
+    >
       <button className="mr-[16px]">
         <img src={plus} alt="plus Icon" className="w-[28px] h-[28px]" />
       </button>
