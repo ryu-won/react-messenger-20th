@@ -26,7 +26,6 @@ interface Message {
 }
 
 const ChatRoom: React.FC = () => {
-  // 유저 정보 관리
   const users: { ceos: User; chae: User } = {
     ceos: {
       id: 1,
@@ -46,10 +45,9 @@ const ChatRoom: React.FC = () => {
 
   const [currentUser, setCurrentUser] = useState<User>(users.chae);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [isProfileDetailOpen, setIsProfileDetailOpen] = useState(false); // 프로필 보기 버튼 클릭 상태
+  const [isProfileDetailOpen, setIsProfileDetailOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // 페이지 로딩 시 로컬 스토리지에서 메시지 불러오기
   useEffect(() => {
     const storedMessages = localStorage.getItem("conversationMessages");
     if (storedMessages) {
@@ -57,31 +55,26 @@ const ChatRoom: React.FC = () => {
     }
   }, []);
 
-  // 새로운 메시지가 추가될 때마다 하단으로 스크롤
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
 
-  // 헤더의 프로필을 클릭할 때 사용자 전환
   const toggleUser = () => {
     setCurrentUser(
       currentUser.name === users.chae.name ? users.ceos : users.chae
     );
   };
 
-  // 프로필 보기 버튼 클릭 시 ProfileDetail 열기
   const handleProfileDetail = () => {
     setIsProfileDetailOpen(true);
   };
 
-  // ProfileDetail 닫기
   const closeProfileDetail = () => {
     setIsProfileDetailOpen(false);
   };
 
-  // 메시지 전송
   const handleSendMessage = (newMessage: string) => {
     const currentTime = new Date().toISOString();
     const newMessageData: Message = {

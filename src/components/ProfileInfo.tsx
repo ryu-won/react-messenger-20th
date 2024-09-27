@@ -14,7 +14,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ user, onProfileDetail }) => {
   }
 
   return (
-    <div className="p-4 bg-white ">
+    <div className="bg-white ">
       <div className="flex flex-col items-center">
         {/* 프로필 이미지 */}
         <img

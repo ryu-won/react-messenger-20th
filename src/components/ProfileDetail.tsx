@@ -50,19 +50,19 @@ const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
       <h3 className="text-xl font-bold mt-[26px]">{user.name}</h3>
 
       {/* 소셜 아이콘 */}
-      <div className="flex mt-[18px] space-x-4">
-        <button className=" bg-white rounded-full flex items-center justify-center ">
+      <div className="flex mt-[18px] space-x-[40px]">
+        <button className=" bg-white rounded-full flex items-center justify-center m-0">
           <a href={user.facebook}>
             <img src={facebook} alt="facebook" className="w-[60px] h-[60px]" />
           </a>
         </button>
 
-        <button className=" bg-white rounded-full flex items-center justify-center ">
+        <button className=" bg-white rounded-full flex items-center justify-center m-0">
           <a href={user.instagram}>
             <img
               src={instagram}
               alt="instagram"
-              className="w-[60px] h-[60px]"
+              className="w-[60px] h-[60px] "
             />
           </a>
         </button>
