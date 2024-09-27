@@ -97,7 +97,7 @@ const ChatRoom: React.FC = () => {
   };
 
   return (
-    <div className="relative flex flex-col h-[100vh] w-full md:max-w-[375px] mx-auto">
+    <div className="relative flex flex-col h-[100vh] w-full md:max-w-[375px] mx-auto overflow-y-none">
       <Header
         user={currentUser}
         onProfileClick={toggleUser}
