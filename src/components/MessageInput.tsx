@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import plus from "../assets/plus.svg";
 import smile from "../assets/smile.svg";
 import thumb_up from "../assets/thumb_up.svg";
+import sendIcon from "../assets/send.svg";
 
 interface MessageInputProps {
   onSendMessage: (message: string) => void;
@@ -9,11 +10,13 @@ interface MessageInputProps {
 
 const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
   const [message, setMessage] = useState<string>("");
+  const [isInputClicked, setIsInputClicked] = useState<boolean>(false);
 
   const handleSend = (): void => {
     if (message.trim() !== "") {
       onSendMessage(message);
       setMessage("");
+      setIsInputClicked(false);
     }
   };
 
@@ -32,11 +35,13 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
       <input
         type="text"
         value={message}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setMessage(e.target.value)
-        }
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setMessage(e.target.value);
+          setIsInputClicked(true);
+        }}
         onKeyUp={handleKeyUp}
-        className="flex-1 w-[255px] h-[34px] px-[7px] py-[16px] border focus:outline-none"
+        onFocus={() => setIsInputClicked(true)}
+        className="flex-1 w-[255px] h-[34px] px-[16px] py-[7px] border focus:outline-none"
         style={{ borderRadius: "60px", backgroundColor: "#F0F2F3" }}
         placeholder="Aa"
       ></input>
@@ -47,7 +52,11 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
         style={{ width: "24px", height: "24px" }}
       />
       <button className="ml-[16px]" onClick={handleSend}>
-        <img src={thumb_up} alt="thumb_up Icon" className="w-[28px] h-[28px]" />
+        <img
+          src={isInputClicked ? sendIcon : thumb_up}
+          alt={isInputClicked ? "send Icon" : "thumb_up Icon"}
+          className="w-[28px] h-[28px]"
+        />
       </button>
     </div>
   );

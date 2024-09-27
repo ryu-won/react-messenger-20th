@@ -1,4 +1,3 @@
-import React from "react";
 import ceosProfilePic from "../assets/Profile image.svg";
 import userProfilePic from "../assets/Profile image.svg";
 import styled from "styled-components";
@@ -103,8 +102,8 @@ const MessageText = styled.div<{ isCurrentUser: boolean }>`
 const TimeText = styled.span<{ isCurrentUser: boolean }>`
   font-size: 12px;
   color: #999;
-  margin-left: ${(props) => (props.isCurrentUser ? "8px" : "0")};
-  margin-right: ${(props) => (!props.isCurrentUser ? "8px" : "0")};
+  margin-left: ${(props) => (props.isCurrentUser ? "0" : "4px")};
+  margin-right: ${(props) => (props.isCurrentUser ? "4px" : "0")};
 `;
 
 export default MessageList;

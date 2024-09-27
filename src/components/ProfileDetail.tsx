@@ -1,35 +1,25 @@
-import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import cancel from "../assets/cancel.svg";
-import setting from "../assets/setting.svg";
+import settings from "../assets/setting.svg";
 
 interface User {
   name: string;
   profilePic: string;
 }
 
-interface LocationState {
+interface ProfileDetailProps {
   user: User;
+  onClose: () => void;
 }
 
-const ProfileDetail: React.FC = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const user = (location.state as LocationState)?.user;
-
-  if (!user) {
-    return <div>유저 정보가 없습니다.</div>;
-  }
-
+const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
   return (
-    <div className="h-[100vh] bg-blue-100 flex flex-col items-center justify-center w-[375px] mx-auto ">
-      {/* 상단 바 */}
-      <div className="fixed top-0 flex items-center justify-between w-[375px] px-4">
-        <button onClick={() => navigate(-1)}>
-          <img src={cancel} alt="cancel" />
+    <div className="h-[100vh] bg-white bg-opacity-5 flex flex-col items-center justify-center w-[375px] mx-auto">
+      <div className="fixed top-0 flex items-center justify-between w-[375px] px-[16px] py-[14px]">
+        <button onClick={onClose}>
+          <img src={cancel} alt="Cancel" />
         </button>
         <button>
-          <img src={setting} alt="setting" />
+          <img src={settings} alt="Settings" />
         </button>
       </div>
 

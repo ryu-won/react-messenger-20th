@@ -1,5 +1,3 @@
-import React from "react";
-
 interface User {
   name: string;
   profilePic: string;
@@ -16,25 +14,36 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ user, onProfileDetail }) => {
   }
 
   return (
-    <div className="p-4 bg-white">
+    <div className="p-4 bg-white ">
       <div className="flex flex-col items-center">
         {/* 프로필 이미지 */}
         <img
           src={user.profilePic}
           alt="Profile"
-          className="w-[100px] h-[100px] rounded-full"
+          className="w-[96px] h-[100px] rounded-full"
         />
 
         {/* 사용자 이름 */}
-        <h3 className="text-xl font-bold mt-2">{user.name}</h3>
+        <h3 className=" font-bold mt-[10px]" style={{ fontSize: "22px" }}>
+          {user.name}
+        </h3>
 
         {/* 추가 정보 */}
-        <p className="text-gray-500">Facebook 친구입니다</p>
-        <p className="text-gray-500">서울특별시 마포 거주</p>
+        <p className="text-sm mt-[10px]" style={{ color: "#8D8D8D" }}>
+          Facebook 친구입니다
+        </p>
+        <p className="text-sm mt-[4px]" style={{ color: "#8D8D8D" }}>
+          서울특별시 마포 거주
+        </p>
 
         {/* 프로필 보기 버튼 */}
         <button
-          className="mt-4 px-4 py-2 rounded-full border text-gray-600"
+          className="mt-[10px] px-[20px] py-[6px] rounded-full text-gray-600"
+          style={{
+            color: "#737373",
+            backgroundColor: "#F0F2F3",
+            fontSize: "14px",
+          }}
           onClick={onProfileDetail}
         >
           프로필 보기
