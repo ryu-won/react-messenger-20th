@@ -85,7 +85,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, currentUser }) => {
               </DateTimeText>
             )}
             <MessageContainer
-              key={`${message.id}-${currentSender}`} // key에 currentSender를 추가하여 애니메이션 재실행
+              key={`${message.id}-${currentSender}`}
               isCurrentUser={message.sender === currentUser.name}
             >
               {message.sender !== currentUser.name && (

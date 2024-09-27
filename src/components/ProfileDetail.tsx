@@ -51,13 +51,13 @@ const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
 
       {/* 소셜 아이콘 */}
       <div className="flex mt-[18px] space-x-[40px]">
-        <button className=" bg-white rounded-full flex items-center justify-center m-0">
+        <button className="  rounded-full flex items-center justify-center">
           <a href={user.facebook}>
             <img src={facebook} alt="facebook" className="w-[60px] h-[60px]" />
           </a>
         </button>
 
-        <button className=" bg-white rounded-full flex items-center justify-center m-0">
+        <button className="  rounded-full flex items-center justify-center">
           <a href={user.instagram}>
             <img
               src={instagram}
@@ -66,7 +66,7 @@ const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
             />
           </a>
         </button>
-        <button className=" bg-white rounded-full flex items-center justify-center ">
+        <button className="  rounded-full flex items-center justify-center ">
           <a href="#">
             <img src={plus} alt="plus" className="w-[60px] h-[60px]" />
           </a>
