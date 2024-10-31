@@ -2,17 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 import MessageList from "../components/MessageList";
 import MessageInput from "../components/MessageInput";
 import ProfileInfo from "../components/ProfileInfo";
-import Header from "../components/Header";
+import Header from "../components/ChatRoomHeader";
 import ProfileDetail from "../pages/ProfileDetail";
 import ceosProfilePic from "../assets/Profile image.svg";
 import userProfilePic from "../assets/Profile image.svg";
 
-interface User {
+export interface User {
   id: number;
   name: string;
   profilePic: string;
   facebook: string;
   instagram: string;
+  description?: string;
 }
 
 interface Message {

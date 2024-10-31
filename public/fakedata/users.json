@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "name": "김류원",
+    "profilePic": "../assets/Profile image.svg",
+    "facebook": "https://www.facebook.com/",
+    "instagram": "https://www.instagram.com/"
+  },
+  {
+    "id": 1,
+    "name": "CEOS",
+    "profilePic": "../assets/Profile image.svg",
+    "facebook": "https://www.facebook.com/clubceos/",
+    "instagram": "https://www.instagram.com/ceos.sinchon/",
+    "description": "IT 연합 동아리"
+  },
+
+  {
+    "id": 2,
+    "name": "차은우",
+    "profilePic": "../assets/Profile image.svg",
+    "facebook": "https://www.facebook.com/",
+    "instagram": "https://www.instagram.com/",
+    "description": "차은우! 차은우! 차은우!"
+  },
+  {
+    "id": 3,
+    "name": "송강",
+    "profilePic": "../assets/Profile image.svg",
+    "facebook": "https://www.facebook.com/",
+    "instagram": "https://www.instagram.com/",
+    "description": "스위트홈에서 잘생김"
+  },
+  {
+    "id": 4,
+    "name": "뷔",
+    "profilePic": "../assets/Profile image.svg",
+    "facebook": "https://www.facebook.com/",
+    "instagram": "https://www.instagram.com/",
+    "description": "그냥 잘생김"
+  },
+  {
+    "id": 5,
+    "name": "서강준",
+    "profilePic": "../assets/Profile image.svg",
+    "facebook": "https://www.facebook.com/",
+    "instagram": "https://www.instagram.com/",
+    "description": "정글의법칙에서도 잘생김"
+  }
+]

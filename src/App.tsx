@@ -8,6 +8,7 @@ import ChatRoom from "./pages/ChatRoom";
 import ProfileDetail from "./pages/ProfileDetail";
 import { useState } from "react";
 import BottomNav from "./components/BottomNav";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import Home from "./pages/Home";
 import ChatList from "./pages/ChatList";
@@ -44,7 +45,9 @@ function App() {
           }
         />
       </Routes>
+
       {chatRoomMatch ? null : <BottomNav></BottomNav>}
+      <ReactQueryDevtools />
     </>
   );
 }
