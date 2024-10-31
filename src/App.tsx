@@ -1,9 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ChatRoom from "./components/ChatRoom";
-import ProfileDetail from "./components/ProfileDetail";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useMatch,
+} from "react-router-dom";
+import ChatRoom from "./pages/ChatRoom";
+import ProfileDetail from "./pages/ProfileDetail";
 import { useState } from "react";
+import BottomNav from "./components/BottomNav";
+import FriendsList from "./pages/FriendsList";
 
 function App() {
+  const chatRoomMatch = useMatch("/userID");
+
   // 상태로 관리할 유저 정보
   const [user, setUser] = useState({
     name: "채린공주",
@@ -19,9 +28,10 @@ function App() {
   };
 
   return (
-    <Router>
+    <>
       <Routes>
-        <Route path="/" element={<ChatRoom />} />
+        <Route path="/" element={<FriendsList />} />
+        <Route path="/userID" element={<ChatRoom />} />
 
         {/* 프로필 상세 보기 */}
         <Route
@@ -31,7 +41,8 @@ function App() {
           }
         />
       </Routes>
-    </Router>
+      {chatRoomMatch ? null : <BottomNav></BottomNav>}
+    </>
   );
 }
 

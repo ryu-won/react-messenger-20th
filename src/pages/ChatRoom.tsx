@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import Header from "./Header";
-import MessageList from "./MessageList";
-import MessageInput from "./MessageInput";
-import ProfileInfo from "./ProfileInfo";
+import Header from "../components/Header";
+import MessageList from "../components/MessageList";
+import MessageInput from "../components/MessageInput";
+import ProfileInfo from "../components/ProfileInfo";
 import ProfileDetail from "./ProfileDetail";
 import ceosProfilePic from "../assets/Profile image.svg";
 import userProfilePic from "../assets/Profile image.svg";
