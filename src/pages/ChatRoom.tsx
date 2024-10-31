@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import Header from "../components/Header";
 import MessageList from "../components/MessageList";
 import MessageInput from "../components/MessageInput";
 import ProfileInfo from "../components/ProfileInfo";
-import ProfileDetail from "./ProfileDetail";
+import Header from "../components/Header";
+import ProfileDetail from "../pages/ProfileDetail";
 import ceosProfilePic from "../assets/Profile image.svg";
 import userProfilePic from "../assets/Profile image.svg";
 
@@ -34,7 +34,7 @@ const ChatRoom: React.FC = () => {
     },
     chae: {
       id: 2,
-      name: "채린공주",
+      name: "김류원",
       profilePic: userProfilePic,
       facebook: "https://www.facebook.com/",
       instagram: "https://www.instagram.com/",
@@ -51,13 +51,13 @@ const ChatRoom: React.FC = () => {
       id: 1,
       text: "머하밍??",
       sender: "CEOS",
-      receiver: "채린공주",
+      receiver: "김류원",
       time: new Date().toISOString(),
     },
     {
       id: 2,
       text: "과제중🤮🤮",
-      sender: "채린공주",
+      sender: "김류원",
       receiver: "CEOS",
       time: new Date().toISOString(),
     },
@@ -65,7 +65,7 @@ const ChatRoom: React.FC = () => {
       id: 3,
       text: "🤦‍♀️🤦‍♀️",
       sender: "CEOS",
-      receiver: "채린공주",
+      receiver: "김류원",
       time: new Date().toISOString(),
     },
   ];

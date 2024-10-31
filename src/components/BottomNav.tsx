@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BottomNav = () => {
   const [activeTab, setActiveTab] = useState("home");
+  const nav = useNavigate();
 
   return (
     <div className="fixed bottom-0 w-full bg-white border-t border-gray-200 fixed bottom-0 ">
@@ -10,7 +12,7 @@ const BottomNav = () => {
           className={`flex flex-col items-center ${
             activeTab === "home" ? "text-blue-500" : "text-gray-500"
           }`}
-          onClick={() => setActiveTab("home")}
+          onClick={() => nav("/")}
         >
           <img className="w-6 h-6" />
           <span className="text-xs mt-1">홈</span>
@@ -19,7 +21,7 @@ const BottomNav = () => {
           className={`flex flex-col items-center ${
             activeTab === "chat" ? "text-blue-500" : "text-gray-500"
           }`}
-          onClick={() => setActiveTab("chat")}
+          onClick={() => nav("/chat-list")}
         >
           <img className="w-6 h-6" />
           <span className="text-xs mt-1">채팅</span>

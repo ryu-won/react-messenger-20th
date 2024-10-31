@@ -8,14 +8,16 @@ import ChatRoom from "./pages/ChatRoom";
 import ProfileDetail from "./pages/ProfileDetail";
 import { useState } from "react";
 import BottomNav from "./components/BottomNav";
-import FriendsList from "./pages/FriendsList";
+
+import Home from "./pages/Home";
+import ChatList from "./pages/ChatList";
 
 function App() {
   const chatRoomMatch = useMatch("/userID");
 
   // 상태로 관리할 유저 정보
   const [user, setUser] = useState({
-    name: "채린공주",
+    name: "김류원",
     profilePic: "/path/to/profile-pic.jpg",
     facebook: "https://www.facebook.com/",
     instagram: "https://www.facebook.com/",
@@ -30,8 +32,9 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<FriendsList />} />
+        <Route path="/" element={<Home />} />
         <Route path="/userID" element={<ChatRoom />} />
+        <Route path="/chat-list" element={<ChatList />} />
 
         {/* 프로필 상세 보기 */}
         <Route

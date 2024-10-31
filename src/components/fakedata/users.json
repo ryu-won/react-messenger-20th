@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "CEOS",
+    "profilePic": "../assets/Profile image.svg",
+    "facebook": "https://www.facebook.com/clubceos/",
+    "instagram": "https://www.instagram.com/ceos.sinchon/"
+  },
+  {
+    "id": 2,
+    "name": "김류원",
+    "profilePic": "../assets/Profile image.svg",
+    "facebook": "https://www.facebook.com/",
+    "instagram": "https://www.instagram.com/"
+  }
+]
