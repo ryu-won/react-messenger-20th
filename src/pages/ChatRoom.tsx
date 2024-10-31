@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import MessageList from "../components/MessageList";
 import MessageInput from "../components/MessageInput";
 import ProfileInfo from "../components/ProfileInfo";
-import Header from "../components/ChatRoomHeader";
+import Header from "../components/CHeader";
 import ProfileDetail from "../pages/ProfileDetail";
 import ceosProfilePic from "../assets/Profile image.svg";
 import userProfilePic from "../assets/Profile image.svg";
@@ -16,7 +16,7 @@ export interface User {
   description?: string;
 }
 
-interface Message {
+export interface Message {
   id: number;
   text: string;
   sender: string;

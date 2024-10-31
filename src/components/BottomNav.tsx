@@ -1,8 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {
+  useLocation,
+  useMatch,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
 const BottomNav = () => {
   const [activeTab, setActiveTab] = useState("home");
+  const location = useLocation();
+
   const nav = useNavigate();
 
   return (
@@ -10,7 +17,7 @@ const BottomNav = () => {
       <div className="flex justify-around items-center py-2">
         <button
           className={`flex flex-col items-center ${
-            activeTab === "home" ? "text-blue-500" : "text-gray-500"
+            location.pathname === "/" ? "text-blue-500" : "text-gray-500"
           }`}
           onClick={() => nav("/")}
         >
@@ -19,7 +26,9 @@ const BottomNav = () => {
         </button>
         <button
           className={`flex flex-col items-center ${
-            activeTab === "chat" ? "text-blue-500" : "text-gray-500"
+            location.pathname === "/chat-list"
+              ? "text-blue-500"
+              : "text-gray-500"
           }`}
           onClick={() => nav("/chat-list")}
         >
@@ -28,7 +37,7 @@ const BottomNav = () => {
         </button>
         <button
           className={`flex flex-col items-center ${
-            activeTab === "story" ? "text-blue-500" : "text-gray-500"
+            location.pathname === "/story" ? "text-blue-500" : "text-gray-500"
           }`}
           onClick={() => setActiveTab("story")}
         >
