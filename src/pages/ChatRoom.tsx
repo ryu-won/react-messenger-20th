@@ -42,6 +42,8 @@ const ChatRoom: React.FC = () => {
   const ryuwon = userData.find((item) => item.name === "김류원");
   const other = userData.find((item) => item.name === params.sender);
 
+  const chatKey = `conversationMessages_${params.sender}`;
+
   useEffect(() => {
     if (ryuwon) {
       setCurrentUser(ryuwon);
@@ -56,14 +58,14 @@ const ChatRoom: React.FC = () => {
 
   useEffect(() => {
     if (messages.length === 0) {
-      const storedMessages = localStorage.getItem("conversationMessages");
+      const storedMessages = localStorage.getItem(chatKey);
       if (storedMessages) {
         const parsedMessages = JSON.parse(storedMessages).filter(
           (item: Message) =>
             item.sender === params.sender || item.receiver === params.sender
         );
         if (parsedMessages.length > 0) {
-          setMessages((pre) => parsedMessages);
+          setMessages(parsedMessages);
           return;
         }
       }
@@ -75,7 +77,7 @@ const ChatRoom: React.FC = () => {
       );
       setMessages(filteredMessages);
     }
-  }, [params.sender, messageData, messages]);
+  }, [params.sender, messageData, messages, chatKey]);
 
   const [isProfileDetailOpen, setIsProfileDetailOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -106,19 +108,16 @@ const ChatRoom: React.FC = () => {
       text: newMessage,
       sender: "김류원",
       receiver: currentUser
-        ? currentUser?.name === "김류원"
+        ? currentUser.name === "김류원"
           ? otherUser?.name || "김류원"
-          : currentUser?.name
+          : currentUser.name
         : "김류원",
       time: currentTime,
     };
 
     const updatedMessages = [...messages, newMessageData];
     setMessages(updatedMessages);
-    localStorage.setItem(
-      "conversationMessages",
-      JSON.stringify(updatedMessages)
-    );
+    localStorage.setItem(chatKey, JSON.stringify(updatedMessages));
   };
 
   const loading = userLoading || messageLoading || !currentUser || !otherUser;
