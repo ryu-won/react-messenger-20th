@@ -28,7 +28,7 @@ const ChatRoomHeader: React.FC<HeaderProps> = ({
       style={{ filter: isProfileDetailOpen ? "blur(4px)" : "none" }}
     >
       <div className="flex items-center">
-        <button className="mr-[8px]" onClick={() => nav(-2)}>
+        <button className="mr-[8px]" onClick={() => nav(-1)}>
           <img src={backIcon} alt="Back Icon" className="w-[28px] h-[28px]" />
         </button>
 

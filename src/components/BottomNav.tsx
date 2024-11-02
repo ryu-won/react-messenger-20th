@@ -67,7 +67,6 @@ const BottomNav = () => {
           <span className="text-xs mt-1">스토리</span>
         </button>
       </div>
-      <div className="w-16 h-1 bg-black mx-auto mt-1 rounded"></div>
     </div>
   );
 };

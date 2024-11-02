@@ -6,7 +6,7 @@ import CHeader from "../components/CHeader";
 import ProfileDetail from "../pages/ProfileDetail";
 import { useQuery } from "react-query";
 import { fetchMessages, fetchUsers } from "../api";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export interface User {
   id: number;
@@ -20,7 +20,7 @@ export interface User {
 export interface Message {
   id: number;
   text: string;
-  sender: string; //
+  sender: string;
   receiver: string;
   time: string;
 }
@@ -55,39 +55,19 @@ const ChatRoom: React.FC = () => {
   }, [params.sender, other]);
 
   useEffect(() => {
-    const messages = messageData.filter(
-      (item: Message) =>
-        item.sender === params.sender || item.receiver === params.sender
-    );
-    if (messages) {
-      setMessages(messages);
-    }
-  }, [params.sender, messageData]);
+    if (messages.length === 0) {
+      const storedMessages = localStorage.getItem("conversationMessages");
+      if (storedMessages) {
+        const parsedMessages = JSON.parse(storedMessages).filter(
+          (item: Message) =>
+            item.sender === params.sender || item.receiver === params.sender
+        );
+        if (parsedMessages.length > 0) {
+          setMessages((pre) => parsedMessages);
+          return;
+        }
+      }
 
-  //함수? useeffect -> state에 담아야함
-  //이전페이지에서 데이터 받기
-
-  const [isProfileDetailOpen, setIsProfileDetailOpen] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    // LocalStorage에 저장된 메시지가 있으면 불러오기
-    const storedMessages = localStorage.getItem("conversationMessages");
-    if (storedMessages) {
-      const currentJson = JSON.parse(storedMessages);
-      setMessages((pre) =>
-        currentJson
-          ? currentJson.filter(
-              (item: Message) =>
-                item.sender === params.sender || item.receiver === params.sender
-            )
-          : pre
-      );
-    }
-  }, [params.name, params.sender]);
-
-  useEffect(() => {
-    if (messages.length === 0 && messageData.length > 0) {
       const filteredMessages = messageData.filter(
         (item) =>
           (item.sender === params.sender && item.receiver === "김류원") ||
@@ -95,7 +75,10 @@ const ChatRoom: React.FC = () => {
       );
       setMessages(filteredMessages);
     }
-  }, [params.sender, messageData]);
+  }, [params.sender, messageData, messages]);
+
+  const [isProfileDetailOpen, setIsProfileDetailOpen] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -126,7 +109,7 @@ const ChatRoom: React.FC = () => {
         ? currentUser?.name === "김류원"
           ? otherUser?.name || "김류원"
           : currentUser?.name
-        : "김류원", //
+        : "김류원",
       time: currentTime,
     };
 
@@ -138,11 +121,7 @@ const ChatRoom: React.FC = () => {
     );
   };
 
-  const loading =
-    userLoading ||
-    messageLoading ||
-    currentUser === undefined ||
-    otherUser === undefined;
+  const loading = userLoading || messageLoading || !currentUser || !otherUser;
 
   return loading ? (
     <div>로딩중</div>

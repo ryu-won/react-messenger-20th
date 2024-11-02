@@ -29,7 +29,7 @@ const Home = () => {
       {isLoading ? (
         <div>로딩중</div>
       ) : (
-        <div className="w-full bg-white mt-[56px] md:max-w-[375px] mx-auto">
+        <div className="w-full bg-white mt-[56px] md:max-w-[375px] mx-auto overscroll-y-auto	">
           {/* 사용자 프로필 */}
           <div
             className="flex items-center p-4 border-b cursor-pointer"
