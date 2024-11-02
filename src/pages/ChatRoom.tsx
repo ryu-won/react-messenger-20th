@@ -4,8 +4,9 @@ import MessageInput from "../components/MessageInput";
 import ProfileInfo from "../components/ProfileInfo";
 import Header from "../components/CHeader";
 import ProfileDetail from "../pages/ProfileDetail";
-import ceosProfilePic from "../assets/Profile image.svg";
-import userProfilePic from "../assets/Profile image.svg";
+import { useQuery } from "react-query";
+import { fetchMessages, fetchUsers } from "../api";
+import { useParams } from "react-router-dom";
 
 export interface User {
   id: number;
@@ -19,59 +20,53 @@ export interface User {
 export interface Message {
   id: number;
   text: string;
-  sender: string;
+  sender: string; //
   receiver: string;
   time: string;
 }
 
 const ChatRoom: React.FC = () => {
-  const users: { ceos: User; chae: User } = {
-    ceos: {
-      id: 1,
-      name: "CEOS",
-      profilePic: ceosProfilePic,
-      facebook: "https://www.facebook.com/clubceos/",
-      instagram: "https://www.instagram.com/ceos.sinchon/",
-    },
-    chae: {
-      id: 2,
-      name: "김류원",
-      profilePic: userProfilePic,
-      facebook: "https://www.facebook.com/",
-      instagram: "https://www.instagram.com/",
-    },
-  };
+  const { isLoading: messageLoading, data: messageData = [] } = useQuery<
+    Message[]
+  >("chat-message", fetchMessages);
+  const { isLoading: userLoading, data: userData = [] } = useQuery<User[]>(
+    "chat-user",
+    fetchUsers
+  );
+  const [messages, setMessages] = useState<Message[]>([]);
+  const params = useParams();
+  const [currentUser, setCurrentUser] = useState<User>();
+  const [otherUser, setOtherUser] = useState<User>();
 
-  const [currentUser, setCurrentUser] = useState<User>(users.chae);
+  const ryuwon = userData.find((item) => item.name === "김류원");
+  const other = userData.find((item) => item.name === params.sender);
 
-  const otherUser =
-    currentUser.name === users.chae.name ? users.ceos : users.chae;
+  useEffect(() => {
+    if (ryuwon) {
+      setCurrentUser(ryuwon);
+    }
+  }, [userData, ryuwon]);
 
-  const initialMessages: Message[] = [
-    {
-      id: 1,
-      text: "머하밍??",
-      sender: "CEOS",
-      receiver: "김류원",
-      time: new Date().toISOString(),
-    },
-    {
-      id: 2,
-      text: "과제중🤮🤮",
-      sender: "김류원",
-      receiver: "CEOS",
-      time: new Date().toISOString(),
-    },
-    {
-      id: 3,
-      text: "🤦‍♀️🤦‍♀️",
-      sender: "CEOS",
-      receiver: "김류원",
-      time: new Date().toISOString(),
-    },
-  ];
+  useEffect(() => {
+    const other = userData.find((item) => item.name === params.sender);
+    if (other) {
+      setOtherUser(other);
+    }
+  }, [params.sender, other]);
 
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  useEffect(() => {
+    const messages = messageData.filter(
+      (item: Message) =>
+        item.sender === params.sender || item.receiver === params.sender
+    );
+    if (messages) {
+      setMessages(messages);
+    }
+  }, [params.sender, messageData]);
+
+  //함수? useeffect -> state에 담아야함
+  //이전페이지에서 데이터 받기
+
   const [isProfileDetailOpen, setIsProfileDetailOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -90,9 +85,8 @@ const ChatRoom: React.FC = () => {
   }, [messages]);
 
   const toggleUser = () => {
-    setCurrentUser(
-      currentUser.name === users.chae.name ? users.ceos : users.chae
-    );
+    setCurrentUser(currentUser?.name === "김류원" ? other : ryuwon);
+    setOtherUser(currentUser?.name === "김류원" ? ryuwon : other);
   };
 
   const handleProfileDetail = () => {
@@ -108,11 +102,12 @@ const ChatRoom: React.FC = () => {
     const newMessageData: Message = {
       id: messages.length + 1,
       text: newMessage,
-      sender: currentUser.name,
-      receiver:
-        currentUser.name === users.chae.name
-          ? users.ceos.name
-          : users.chae.name,
+      sender: "김류원",
+      receiver: currentUser
+        ? currentUser?.name === "김류원"
+          ? otherUser?.name || "김류원"
+          : currentUser?.name
+        : "김류원", //
       time: currentTime,
     };
 
@@ -124,7 +119,15 @@ const ChatRoom: React.FC = () => {
     );
   };
 
-  return (
+  const loading =
+    userLoading ||
+    messageLoading ||
+    currentUser === undefined ||
+    otherUser === undefined;
+
+  return loading ? (
+    <div>로딩중</div>
+  ) : (
     <div className="relative flex flex-col h-[100vh] w-full md:max-w-[375px] mx-auto overflow-y-none">
       <Header
         user={otherUser}

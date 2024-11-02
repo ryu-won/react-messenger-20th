@@ -1,5 +1,3 @@
-import ceosProfilePic from "../assets/Profile image.svg";
-import userProfilePic from "../assets/Profile image.svg";
 import styled, { keyframes } from "styled-components";
 import React, { useState, useEffect } from "react";
 
@@ -65,7 +63,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, currentUser }) => {
   };
 
   const getProfilePic = (sender: string): string => {
-    return sender === "CEOS" ? ceosProfilePic : userProfilePic;
+    return sender === "CEOS" ? "/Profile_image.svg" : "/Profile_image.svg";
   };
 
   let previousDate: string | null = null;

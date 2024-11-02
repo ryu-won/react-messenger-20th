@@ -34,7 +34,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/userID" element={<ChatRoom />} />
+        <Route path="/chat-room/:sender" element={<ChatRoom />} />
         <Route path="/chat-list" element={<ChatList />} />
 
         {/* 프로필 상세 보기 */}

@@ -2,6 +2,7 @@ import backIcon from "../assets/Back.svg";
 import call from "../assets/call.svg";
 import video from "../assets/video.svg";
 import search from "../assets/search.svg";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface User {
   name: string;
@@ -19,13 +20,15 @@ const ChatRoomHeader: React.FC<HeaderProps> = ({
   onProfileClick,
   isProfileDetailOpen,
 }) => {
+  const nav = useNavigate();
+
   return (
     <div
       className="flex items-center justify-between py-[11px] px-[16px] bg-white border-b-[1px] fixed top-0 w-full md:max-w-[375px] h-[56px]"
       style={{ filter: isProfileDetailOpen ? "blur(4px)" : "none" }}
     >
       <div className="flex items-center">
-        <button className="mr-[8px]">
+        <button className="mr-[8px]" onClick={() => nav(-1)}>
           <img src={backIcon} alt="Back Icon" className="w-[28px] h-[28px]" />
         </button>
 

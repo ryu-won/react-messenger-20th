@@ -21,7 +21,11 @@ const Home = () => {
         <div className="w-full mx-auto bg-white mt-[56px] md:max-w-[375px]">
           {/* 사용자 프로필 */}
           <div className="flex items-center p-4 border-b">
-            <div className="w-16 h-16 rounded-full bg-gray-200 flex-shrink-0" />
+            <img
+              className="w-16 h-16 rounded-full bg-gray-200 flex-shrink-0"
+              src={`${data[0].profilePic}`}
+              alt=""
+            />
             <div className="ml-4">
               <p className="text-xl font-semibold">{data[0].name}</p>
             </div>

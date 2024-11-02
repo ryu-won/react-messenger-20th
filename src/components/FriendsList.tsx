@@ -8,7 +8,11 @@ const FriendsList = ({ data }: { data: User[] }) => {
       {data.slice(1).map((user) => {
         return (
           <div className="flex items-center">
-            <div className="w-12 h-12 rounded-full bg-gray-200" />
+            <img
+              className="w-12 h-12 rounded-full bg-gray-200"
+              src={`${user.profilePic}`}
+              alt=""
+            />
             <div className="ml-4 text-left">
               <div className="font-semibold">{user.name}</div>
               <div className="text-sm text-gray-500">{user.description}</div>

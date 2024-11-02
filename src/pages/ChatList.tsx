@@ -11,7 +11,7 @@ const ChatList = () => {
   );
 
   const chatItemData = data.reduceRight((p: Message[], n: Message) => {
-    if (!p.find((item) => item.sender === n.sender)) {
+    if (!p.find((item) => item.sender === n.sender) && n.sender !== "김류원") {
       return [...p, n];
     }
     return p;
