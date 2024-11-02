@@ -1,5 +1,4 @@
 import Header from "../components/Header";
-
 import { useQuery } from "react-query";
 import { fetchUsers } from "../api";
 import { User } from "./ChatRoom";
