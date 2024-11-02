@@ -14,21 +14,7 @@ import Home from "./pages/Home";
 import ChatList from "./pages/ChatList";
 
 function App() {
-  const chatRoomMatch = useMatch("/userID");
-
-  // 상태로 관리할 유저 정보
-  const [user, setUser] = useState({
-    name: "김류원",
-    profilePic: "/path/to/profile-pic.jpg",
-    facebook: "https://www.facebook.com/",
-    instagram: "https://www.facebook.com/",
-  });
-
-  // ProfileDetail에서 닫기 기능을 위한 핸들러
-  const handleCloseProfileDetail = () => {
-    console.log("Profile detail closed");
-    // 추가적인 동작이 필요할 경우 이곳에 작성
-  };
+  const chatRoomMatch = useMatch("/chat-room/:sender");
 
   return (
     <>
@@ -36,17 +22,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/chat-room/:sender" element={<ChatRoom />} />
         <Route path="/chat-list" element={<ChatList />} />
-
-        {/* 프로필 상세 보기 */}
-        <Route
-          path="/profile-detail"
-          element={
-            <ProfileDetail user={user} onClose={handleCloseProfileDetail} />
-          }
-        />
       </Routes>
+      <div className=" md:max-w-[375px] mx-auto">
+        {" "}
+        {chatRoomMatch ? null : <BottomNav></BottomNav>}
+      </div>
 
-      {chatRoomMatch ? null : <BottomNav></BottomNav>}
       <ReactQueryDevtools />
     </>
   );

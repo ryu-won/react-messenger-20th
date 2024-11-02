@@ -18,13 +18,13 @@ const ChatItem = ({ sender, text }: Message) => {
   };
 
   return (
-    <div className="flex items-center cursor-pointer" onClick={onClick}>
+    <div className="flex items-center cursor-pointer  p-3 " onClick={onClick}>
       <div>
         {!isLoading && (
-          <img className="w-12 h-12 rounded-full" src={getProfilePic} alt="" />
+          <img className="w-12 h-12 rounded-full " src={getProfilePic} alt="" />
         )}
       </div>
-      <div className="ml-4 text-left cursor-pointer">
+      <div className="ml-4 text-left cursor-pointer  justify-self-center ">
         <div className="font-semibold">{sender}</div>
         <div className="text-sm text-gray-500">{text}</div>
       </div>

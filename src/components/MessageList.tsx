@@ -1,12 +1,13 @@
 import styled, { keyframes } from "styled-components";
 import React, { useState, useEffect } from "react";
+import { Message } from "../pages/ChatRoom";
 
-interface Message {
-  id: string | number;
-  sender: string;
-  text: string;
-  time: string | number | Date;
-}
+// interface Message {
+//   id: string | number;
+//   sender: string;
+//   text: string;
+//   time: string | number | Date;
+// }
 
 interface User {
   name: string;
@@ -15,6 +16,8 @@ interface User {
 interface MessageListProps {
   messages: Message[];
   currentUser: User;
+  messageData: Message[];
+  setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
 }
 
 // 애니메이션 정의
@@ -29,7 +32,12 @@ const fadeIn = keyframes`
   }
 `;
 
-const MessageList: React.FC<MessageListProps> = ({ messages, currentUser }) => {
+const MessageList: React.FC<MessageListProps> = ({
+  messages,
+  currentUser,
+  messageData,
+  setMessages,
+}) => {
   const [currentSender, setCurrentSender] = useState(currentUser.name);
 
   useEffect(() => {

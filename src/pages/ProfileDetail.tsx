@@ -4,6 +4,7 @@ import facebook from "../assets/profile_facebook.svg";
 import instagram from "../assets/profile_insta.svg";
 import plus from "../assets/profile_plus.svg";
 import edit from "../assets/edit.svg";
+import { useMatch, useNavigate } from "react-router-dom";
 
 interface User {
   name: string;
@@ -18,8 +19,15 @@ interface ProfileDetailProps {
 }
 
 const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
+  const match = useMatch("/");
+  const nav = useNavigate();
+
   return (
-    <div className="h-[100vh] bg-white bg-opacity-5 flex flex-col items-center justify-center w-[375px] mx-auto">
+    <div
+      className={`h-[100vh] bg-white flex flex-col items-center justify-center  md:max-w-[375px] w-[full] mx-auto ${
+        match ? "" : "bg-opacity-5"
+      }`}
+    >
       <div className="fixed top-0 flex items-center justify-between w-full md:max-w-[375px] px-[16px] py-[14px]">
         <button onClick={onClose}>
           <img src={cancel} alt="Cancel" />
@@ -63,7 +71,10 @@ const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
             />
           </a>
         </button>
-        <button className="  rounded-full flex items-center justify-center ">
+        <button
+          className="  rounded-full flex items-center justify-center "
+          onClick={() => nav(`/chat-room/${user.name}`)}
+        >
           <a href="#">
             <img src={plus} alt="plus" className="w-[60px] h-[60px]" />
           </a>

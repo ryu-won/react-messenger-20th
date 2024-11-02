@@ -16,10 +16,10 @@ const ChatList = () => {
     }
     return p;
   }, []);
-  console.log(chatItemData);
+
   // console.log(data);
   return (
-    <div className=" mt-[56px]">
+    <div className=" mt-[56px]  md:max-w-[375px] mx-auto">
       <Header />
       {chatItemData && chatItemData.map((item) => <ChatItem {...item} />)}
     </div>

@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import MessageList from "../components/MessageList";
 import MessageInput from "../components/MessageInput";
 import ProfileInfo from "../components/ProfileInfo";
-import Header from "../components/CHeader";
+import CHeader from "../components/CHeader";
 import ProfileDetail from "../pages/ProfileDetail";
 import { useQuery } from "react-query";
 import { fetchMessages, fetchUsers } from "../api";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export interface User {
   id: number;
@@ -33,6 +33,7 @@ const ChatRoom: React.FC = () => {
     "chat-user",
     fetchUsers
   );
+
   const [messages, setMessages] = useState<Message[]>([]);
   const params = useParams();
   const [currentUser, setCurrentUser] = useState<User>();
@@ -48,7 +49,6 @@ const ChatRoom: React.FC = () => {
   }, [userData, ryuwon]);
 
   useEffect(() => {
-    const other = userData.find((item) => item.name === params.sender);
     if (other) {
       setOtherUser(other);
     }
@@ -74,9 +74,28 @@ const ChatRoom: React.FC = () => {
     // LocalStorage에 저장된 메시지가 있으면 불러오기
     const storedMessages = localStorage.getItem("conversationMessages");
     if (storedMessages) {
-      setMessages(JSON.parse(storedMessages));
+      const currentJson = JSON.parse(storedMessages);
+      setMessages((pre) =>
+        currentJson
+          ? currentJson.filter(
+              (item: Message) =>
+                item.sender === params.sender || item.receiver === params.sender
+            )
+          : pre
+      );
     }
-  }, []);
+  }, [params.name, params.sender]);
+
+  useEffect(() => {
+    if (messages.length === 0 && messageData.length > 0) {
+      const filteredMessages = messageData.filter(
+        (item) =>
+          (item.sender === params.sender && item.receiver === "김류원") ||
+          (item.sender === "김류원" && item.receiver === params.sender)
+      );
+      setMessages(filteredMessages);
+    }
+  }, [params.sender, messageData]);
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -129,7 +148,7 @@ const ChatRoom: React.FC = () => {
     <div>로딩중</div>
   ) : (
     <div className="relative flex flex-col h-[100vh] w-full md:max-w-[375px] mx-auto overflow-y-none">
-      <Header
+      <CHeader
         user={otherUser}
         onProfileClick={toggleUser}
         isProfileDetailOpen={isProfileDetailOpen}
@@ -142,7 +161,12 @@ const ChatRoom: React.FC = () => {
         style={{ filter: isProfileDetailOpen ? "blur(4px)" : "none" }}
       >
         <ProfileInfo user={otherUser} onProfileDetail={handleProfileDetail} />
-        <MessageList messages={messages} currentUser={currentUser} />
+        <MessageList
+          messages={messages}
+          currentUser={currentUser}
+          messageData={messageData}
+          setMessages={setMessages}
+        />
         <div ref={messagesEndRef} />
       </div>
       <MessageInput
