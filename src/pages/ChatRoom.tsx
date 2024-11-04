@@ -36,18 +36,16 @@ const ChatRoom: React.FC = () => {
   );
   const location = useLocation();
   const params = useParams();
-  const chatRoomId = location.state?.chatRoomId || params.sender;
+  const chatRoomId = location.state?.chatRoomId;
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [currentUser, setCurrentUser] = useState<User>();
   const [otherUser, setOtherUser] = useState<User>();
 
   const ryuwon = userData.find((item) => item.name === "김류원");
-  const other = userData.find(
-    (item) => item.name === (chatRoomId || params.sender)
-  );
+  const other = userData.find((item) => item.name === chatRoomId);
 
-  const chatKey = `conversationMessages_${chatRoomId || params.sender}`;
+  const chatKey = `conversationMessages_${chatRoomId}`;
 
   useEffect(() => {
     if (ryuwon) {
@@ -67,8 +65,7 @@ const ChatRoom: React.FC = () => {
       if (storedMessages) {
         const parsedMessages = JSON.parse(storedMessages).filter(
           (item: Message) =>
-            item.sender === (chatRoomId || params.sender) ||
-            item.receiver === (chatRoomId || params.sender)
+            item.sender === chatRoomId || item.receiver === chatRoomId
         );
         if (parsedMessages.length > 0) {
           setMessages(parsedMessages);
@@ -78,10 +75,8 @@ const ChatRoom: React.FC = () => {
 
       const filteredMessages = messageData.filter(
         (item) =>
-          (item.sender === (chatRoomId || params.sender) &&
-            item.receiver === "김류원") ||
-          (item.sender === "김류원" &&
-            item.receiver === (chatRoomId || params.sender))
+          (item.sender === chatRoomId && item.receiver === "김류원") ||
+          (item.sender === "김류원" && item.receiver === chatRoomId)
       );
       setMessages(filteredMessages);
     }
@@ -121,7 +116,7 @@ const ChatRoom: React.FC = () => {
           : currentUser.name
         : "김류원",
       time: currentTime,
-      chatRoomId: `${chatRoomId || params.sender}`,
+      chatRoomId: `${chatRoomId}`,
     };
 
     const updatedMessages = [...messages, newMessageData];
