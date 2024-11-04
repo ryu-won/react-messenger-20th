@@ -10,72 +10,12 @@ interface MessageInputProps {
   isProfileDetailOpen: boolean;
 }
 
-interface ThumbsUpProps {
-  x: number;
-  y: number;
-}
-
-const floatUp = keyframes`
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100px) scale(1.5);
-    opacity: 0;
-  }
-`;
-
-const ThumbsUpEmoji = styled.div<ThumbsUpProps>`
-  position: absolute;
-  left: ${(props) => props.x}px;
-  bottom: ${(props) => props.y}px;
-  font-size: 24px;
-  animation: ${floatUp} 1s ease-out forwards;
-`;
-
-const ThumbsUpAnimation: React.FC = () => {
-  const [thumbsUp, setThumbsUp] = useState<ThumbsUpProps[]>([]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setThumbsUp((prev) => prev.slice(1));
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const createThumbsUp = () => {
-    const newThumbsUp = Array(5)
-      .fill(null)
-      .map(() => ({
-        x: Math.random() * 300,
-        y: Math.random() * 50 + 50,
-      }));
-    setThumbsUp((prev) => [...prev, ...newThumbsUp]);
-  };
-
-  return (
-    <>
-      {thumbsUp.map((thumb, index) => (
-        <ThumbsUpEmoji key={index} x={thumb.x} y={thumb.y}>
-          👍
-        </ThumbsUpEmoji>
-      ))}
-      <button onClick={createThumbsUp} style={{ display: "none" }}>
-        Create Thumbs Up
-      </button>
-    </>
-  );
-};
-
 const MessageInput: React.FC<MessageInputProps> = ({
   onSendMessage,
   isProfileDetailOpen,
 }) => {
   const [message, setMessage] = useState<string>("");
   const [isInputClicked, setIsInputClicked] = useState<boolean>(false);
-  const [showAnimation, setShowAnimation] = useState<boolean>(false);
 
   const handleSend = (): void => {
     if (message.trim() !== "") {
@@ -94,8 +34,6 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
   const handleThumbsUp = (): void => {
     onSendMessage("👍");
-    setShowAnimation(true);
-    setTimeout(() => setShowAnimation(false), 1000);
   };
 
   return (
@@ -135,7 +73,6 @@ const MessageInput: React.FC<MessageInputProps> = ({
           className="w-[28px] h-[28px]"
         />
       </button>
-      {showAnimation && <ThumbsUpAnimation />}
     </div>
   );
 };
