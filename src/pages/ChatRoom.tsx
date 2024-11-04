@@ -36,7 +36,7 @@ const ChatRoom: React.FC = () => {
   );
   const location = useLocation();
   const params = useParams();
-  const chatRoomId = location.state?.chatRoomId;
+  const chatRoomId = location.state?.chatRoomId || params.sender;
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [currentUser, setCurrentUser] = useState<User>();
