@@ -73,7 +73,9 @@ const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
         </button>
         <button
           className="  rounded-full flex items-center justify-center "
-          onClick={() => nav(`/chat-room/${user.name}`)}
+          onClick={() =>
+            nav(`/chat-room/${user.name}`, { state: { chatRoomId: user.name } })
+          }
         >
           <a href="#">
             <img src={plus} alt="plus" className="w-[60px] h-[60px]" />

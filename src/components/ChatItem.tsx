@@ -3,7 +3,7 @@ import { Message, User } from "../pages/ChatRoom";
 import { fetchUsers } from "../api";
 import { useNavigate } from "react-router-dom";
 
-const ChatItem = ({ sender, text }: Message) => {
+const ChatItem = ({ sender, text, chatRoomId, receiver }: Message) => {
   const { isLoading, data = [] } = useQuery("messageUser", fetchUsers);
   const nav = useNavigate();
 
@@ -14,7 +14,7 @@ const ChatItem = ({ sender, text }: Message) => {
   const getProfilePic = findProfilePic()?.profilePic;
 
   const onClick = () => {
-    nav(`/chat-room/${sender}`);
+    nav(`/chat-room/${chatRoomId}`, { state: { chatRoomId: chatRoomId } });
   };
 
   return (
@@ -25,7 +25,9 @@ const ChatItem = ({ sender, text }: Message) => {
         )}
       </div>
       <div className="ml-4 text-left cursor-pointer  justify-self-center ">
-        <div className="font-semibold">{sender}</div>
+        <div className="font-semibold">
+          {sender === "김류원" ? receiver : sender}
+        </div>
         <div className="text-sm text-gray-500">{text}</div>
       </div>
     </div>

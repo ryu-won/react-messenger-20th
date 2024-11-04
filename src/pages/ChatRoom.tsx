@@ -6,7 +6,7 @@ import CHeader from "../components/CHeader";
 import ProfileDetail from "../pages/ProfileDetail";
 import { useQuery } from "react-query";
 import { fetchMessages, fetchUsers } from "../api";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export interface User {
   id: number;
@@ -23,6 +23,7 @@ export interface Message {
   sender: string;
   receiver: string;
   time: string;
+  chatRoomId: string;
 }
 
 const ChatRoom: React.FC = () => {
@@ -33,16 +34,20 @@ const ChatRoom: React.FC = () => {
     "chat-user",
     fetchUsers
   );
+  const location = useLocation();
+  const { chatRoomId } = location.state;
+  const params = useParams();
 
   const [messages, setMessages] = useState<Message[]>([]);
-  const params = useParams();
   const [currentUser, setCurrentUser] = useState<User>();
   const [otherUser, setOtherUser] = useState<User>();
 
   const ryuwon = userData.find((item) => item.name === "김류원");
-  const other = userData.find((item) => item.name === params.sender);
+  const other = userData.find(
+    (item) => item.name === (chatRoomId || params.sender)
+  );
 
-  const chatKey = `conversationMessages_${params.sender}`;
+  const chatKey = `conversationMessages_${chatRoomId || params.sender}`;
 
   useEffect(() => {
     if (ryuwon) {
@@ -54,7 +59,7 @@ const ChatRoom: React.FC = () => {
     if (other) {
       setOtherUser(other);
     }
-  }, [params.sender, other]);
+  }, [params.sender, chatRoomId, other]);
 
   useEffect(() => {
     if (messages.length === 0) {
@@ -62,7 +67,8 @@ const ChatRoom: React.FC = () => {
       if (storedMessages) {
         const parsedMessages = JSON.parse(storedMessages).filter(
           (item: Message) =>
-            item.sender === params.sender || item.receiver === params.sender
+            item.sender === (chatRoomId || params.sender) ||
+            item.receiver === (chatRoomId || params.sender)
         );
         if (parsedMessages.length > 0) {
           setMessages(parsedMessages);
@@ -72,12 +78,14 @@ const ChatRoom: React.FC = () => {
 
       const filteredMessages = messageData.filter(
         (item) =>
-          (item.sender === params.sender && item.receiver === "김류원") ||
-          (item.sender === "김류원" && item.receiver === params.sender)
+          (item.sender === (chatRoomId || params.sender) &&
+            item.receiver === "김류원") ||
+          (item.sender === "김류원" &&
+            item.receiver === (chatRoomId || params.sender))
       );
       setMessages(filteredMessages);
     }
-  }, [params.sender, messageData, messages, chatKey]);
+  }, [chatRoomId, messageData, messages, chatKey, params.sender]);
 
   const [isProfileDetailOpen, setIsProfileDetailOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -113,6 +121,7 @@ const ChatRoom: React.FC = () => {
           : currentUser.name
         : "김류원",
       time: currentTime,
+      chatRoomId: `${chatRoomId || params.sender}`,
     };
 
     const updatedMessages = [...messages, newMessageData];
