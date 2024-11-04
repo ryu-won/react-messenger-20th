@@ -21,7 +21,7 @@ const Home = () => {
   };
   return (
     <div
-      className=" md:max-w-[375px] mx-auto 
+      className=" md:max-w-[375px] mx-auto overflow-y-none
     "
     >
       <Header></Header>
@@ -29,7 +29,7 @@ const Home = () => {
       {isLoading ? (
         <div>로딩중</div>
       ) : (
-        <div className="w-full bg-white mt-[56px] md:max-w-[375px] mx-auto	mb-[56px] overscroll-y-auto">
+        <div className="w-full bg-white mt-[56px] md:max-w-[375px] mx-auto	mb-[56px]  overflow-y-auto">
           {/* 사용자 프로필 */}
           <div
             className="flex items-center p-4 border-b cursor-pointer"
