@@ -77,9 +77,9 @@ const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, onClose }) => {
             nav(`/chat-room/${user.name}`, { state: { chatRoomId: user.name } })
           }
         >
-          <a href="#">
+          <div>
             <img src={plus} alt="plus" className="w-[60px] h-[60px]" />
-          </a>
+          </div>
         </button>
       </div>
     </div>

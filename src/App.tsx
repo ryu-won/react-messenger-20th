@@ -12,6 +12,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 import Home from "./pages/Home";
 import ChatList from "./pages/ChatList";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const chatRoomMatch = useMatch("/chat-room/:sender");
@@ -22,9 +23,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/chat-room/:sender" element={<ChatRoom />} />
         <Route path="/chat-list" element={<ChatList />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <div className=" md:max-w-[375px] mx-auto">
-        {" "}
         {chatRoomMatch ? null : <BottomNav></BottomNav>}
       </div>
 
