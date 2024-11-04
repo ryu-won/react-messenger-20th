@@ -13,10 +13,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <RecoilRoot>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
         <App />
-      </BrowserRouter>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </BrowserRouter>
   </RecoilRoot>
 );
